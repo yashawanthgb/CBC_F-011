@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Matcher - Parvath Parakram</title>
+    <link rel="stylesheet" href="trail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <section id="ai-matcher" class="ai-matcher">
+        <div class="container">
+            <h2>AI-Powered Trail Matcher</h2>
+            <div class="matcher-container">
+                <div class="form-container">
+                    <div class="card form-card">
+                        <div class="form-group">
+                            <label for="experience">Your Experience Level</label>
+                            <select id="experience">
+                                <option value="" disabled selected>Select experience level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="terrain">Preferred Terrain</label>
+                            <select id="terrain">
+                                <option value="" disabled selected>Select terrain type</option>
+                                <option value="rocky">Rocky</option>
+                                <option value="forested">Forested</option>
+                                <option value="snowy">Snowy</option>
+                                <option value="alpine">Alpine</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Trip Duration</label>
+                            <select id="duration">
+                                <option value="" disabled selected>Select duration</option>
+                                <option value="day">Day Trip</option>
+                                <option value="weekend">Weekend (2-3 days)</option>
+                                <option value="week">Week-long (4-7 days)</option>
+                                <option value="extended">Extended (8+ days)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Destination Region</label>
+                            <select id="region">
+                                <option value="" disabled selected>Select region</option>
+                                <option value="himalayas">Himalayas</option>
+                                <option value="western-ghats">Western Ghats</option>
+                                <option value="eastern-ghats">Eastern Ghats</option>
+                                <option value="nilgiris">Nilgiris</option>
+                            </select>
+                        </div>
+                        <button class="primary-button full-width">Find Perfect Trail</button>
+                    </div>
+                </div>
+                <div class="results-container">
+                    <div class="card results-card">
+                        <div class="results-header">
+                            <h3>Personalized Trail</h3>
+                            <span class="match-tag">89% Match</span>
+                        </div>
+                        <div class="trail-details">
+                            <div class="trail-info">
+                                <span class="info-label">Location:</span>
+                                <span class="info-value">Kedarkantha Peak, Uttarakhand</span>
+                            </div>
+                            <div class="trail-info">
+                                <span class="info-label">Difficulty:</span>
+                                <span class="info-value">Moderate</span>
+                            </div>
+                            <div class="trail-info">
+                                <span class="info-label">Duration:</span>
+                                <span class="info-value">5 days</span>
+                            </div>
+                            <div class="trail-info">
+                                <span class="info-label">Elevation:</span>
+                                <span class="info-value">3,800m</span>
+                            </div>
+                        </div>
+                        <button class="secondary-button full-width">View Details</button>
+                    </div>
+
+                    <div class="real-time-data">
+                        <div class="card data-card">
+                            <h4>Weather</h4>
+                            <div class="data-info">
+                                <span class="data-value">12°C</span>
+                                <span class="data-desc">Partly Cloudy</span>
+                            </div>
+                        </div>
+                        <div class="card data-card">
+                            <h4>Trail Conditions</h4>
+                            <div class="data-info">
+                                <span class="data-value">Good</span>
+                                <span class="data-desc">Recently maintained</span>
+                            </div>
+                        </div>
+                        <div class="card data-card">
+                            <h4>Crowd Level</h4>
+                            <div class="data-info">
+                                <span class="data-value">Low</span>
+                                <span class="data-desc">Few hikers expected</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+</body>
+
+</html>

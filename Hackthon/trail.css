@@ -1,0 +1,287 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-color: #020013;
+    --primary-color: #6c63ff;
+    --secondary-color: #00c853;
+    --tertiary-color: #ff9500;
+    --text-color: #ffffff;
+    --option-color : #161426;
+    --card-bg: rgba(255, 255, 255, 0.08);
+    --card-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+button {
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Card styles */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Form elements */
+input,
+select,
+textarea {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    font-family: 'Inter', sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Dropdown arrow customization */
+select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+/* Dropdown options styling */
+select option {
+    background-color: var(--option-color);
+    color: var(--text-color);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Button styles */
+.primary-button {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.secondary-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Header and section styles */
+section {
+    padding: 80px 0;
+}
+
+section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* AI Trail Matcher Section */
+.ai-matcher {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.matcher-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.form-container {
+    margin-bottom: 20px;
+}
+
+.form-card {
+    padding: 30px;
+    height: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.full-width {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+}
+
+/* Results Container */
+.results-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.results-card {
+    padding: 25px;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.results-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.match-tag {
+    background-color: var(--secondary-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.trail-details {
+    margin-bottom: 25px;
+}
+
+.trail-info {
+    display: flex;
+    margin-bottom: 12px;
+}
+
+.info-label {
+    width: 90px;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.info-value {
+    font-weight: 500;
+}
+
+/* Real-time data cards */
+.real-time-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.data-card {
+    padding: 15px;
+    text-align: center;
+}
+
+.data-card h4 {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.data-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.data-value {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.data-desc {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* Responsive adjustments for the matcher section */
+@media (max-width: 992px) {
+    .matcher-container {
+        grid-template-columns: 1fr;
+    }
+
+    .real-time-data {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .real-time-data {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .real-time-data {
+        grid-template-columns: 1fr;
+    }
+}
