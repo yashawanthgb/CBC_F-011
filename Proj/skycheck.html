@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyCheck - Parvath Parakram</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .skycheck-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .skycheck-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .skycheck-header h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .skycheck-header p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .weather-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #45a049;
+        }
+
+        .weather-card {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-card {
+            background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #4CAF50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .weather-details {
+            margin-top: 1rem;
+        }
+
+        .weather-details h4 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .weather-details p {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .weather-details ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .weather-details li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .weather-details li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Parvath Parakram</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="trail.html">Trail Matcher</a></li>
+                    <li><a href="Safety/index.html">Safety</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="skycheck-container">
+        <section class="skycheck-header">
+            <h1>SkyCheck - Your Mountain Safety Companion</h1>
+            <p>Get real-time weather updates, trail conditions, and safety alerts for your mountain adventures</p>
+        </section>
+
+        <div class="weather-form">
+            <form id="trekForm">
+                <div class="form-group">
+                    <label for="source">Source Location</label>
+                    <input type="text" class="form-control" id="source" required>
+                </div>
+                <div class="form-group">
+                    <label for="destination">Destination Location</label>
+                    <input type="text" class="form-control" id="destination" required>
+                </div>
+                <div class="form-group">
+                    <label for="date">Planned Trek Date</label>
+                    <input type="date" class="form-control" id="date">
+                </div>
+                <button type="submit" class="btn-primary">Check Weather & Restrictions</button>
+            </form>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Fetching weather data...</p>
+        </div>
+
+        <div id="restrictedAlert" class="alert-card" style="display: none;">
+            <h3>⚠️ RESTRICTED LOCATION DETECTED ⚠️</h3>
+            <p id="restrictedReason"></p>
+            <p>Please ensure you have all necessary permits and permissions before proceeding.</p>
+            <p>Contact local authorities for more information about required documentation.</p>
+        </div>
+
+        <div id="weatherResults" style="display: none;">
+            <div class="weather-card">
+                <h3>Source Weather</h3>
+                <div id="sourceWeather"></div>
+            </div>
+            <div class="weather-card">
+                <h3>Destination Weather</h3>
+                <div id="destinationWeather"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">Parvath Parakram</a>
+                    <p class="footer-tagline">Empowering adventures with AI-driven solutions</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Features</h3>
+                        <ul>
+                            <li><a href="#">Trail AI</a></li>
+                            <li><a href="#">Safety Tools</a></li>
+                            <li><a href="#">Itinerary Planner</a></li>
+                            <li><a href="#">Weather Updates</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#">Safety Guide</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#">About Us</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Parvath Parakram. All rights reserved.</p>
+                </div>
+                <div class="footer-legal">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Restricted locations data
+        const RESTRICTED_LOCATIONS = {
+            "arunachal pradesh": "PAP required due to border with China",
+            "nagaland": "PAP required for tribal sensitivity and border control",
+            "mizoram": "PAP required for border and tribal reasons",
+            "manipur": "PAP/RAP needed due to insurgency concerns",
+            "north sikkim": "RAP required, near China border",
+            "nathula": "RAP required, near China border",
+            "tsomgo": "RAP required, near China border",
+            "nicobar": "Tribal protection and isolation",
+            "lakshadweep": "Ecological and strategic restrictions",
+            "ladakh": "Proximity to LAC with China",
+            "tawang": "Strategic location near China border",
+            "ziro": "Tribal region; requires permits",
+            "uri": "Military zone near LoC",
+            "kargil": "Near LoC; military control",
+            "kupwara": "Close to LoC; restricted",
+            "gurez valley": "LoC proximity; permit required",
+            "poonch": "Border area; security restrictions",
+            "nubra valley": "Military zone near Siachen",
+            "siachen": "Complete military restriction",
+            "barren island": "Active volcano; restricted",
+            "silent valley": "Protected biodiversity zone",
+            "great nicobar": "Ecological sensitivity",
+            "changthang": "Permit needed for ecological protection",
+            "kailash mansarovar": "Controlled annual permits",
+            "nanda devi": "Closed to protect ecosystem",
+            "bastar": "Naxalite region and tribal protection",
+            "bhutan border": "Border restrictions",
+            "desert national park": "Ecological fragility",
+            "valley of flowers": "Seasonal closure",
+            "north sentinel": "Complete prohibition to protect tribe",
+            "jarawa reserve": "Tribal protection, road access limited",
+            "nicobar islands": "Shompen tribe protection",
+            "abujhmarh": "Tribal area and insurgency risk",
+            "khonsa": "Tribal and strategic area",
+            "dantewada": "Maoist-affected",
+            "kanker": "Insurgency zone",
+            "gadchiroli": "Naxalite region",
+            "koraput": "Maoist presence",
+            "malkangiri": "Security-sensitive tribal region",
+            "mizoram border": "Border restrictions",
+            "dima hasao": "Ethnic tensions",
+            "tripura border": "Fenced Indo-Bangladesh border",
+            "minicoy": "Permit required; strategic",
+            "kalapani": "Disputed with Nepal",
+            "tirap": "Tribal region near border",
+            "sundarbans": "Tiger reserve protection",
+            "mullaperiyar": "Interstate conflict zone",
+            "dibang valley": "Permit required due to border",
+            "bomdila": "Near China border; permit required",
+            "longding": "Tribal and insurgent activity",
+            "walong": "Permit needed; near border",
+            "mechuka": "Strategic valley near China",
+            "lunglei": "Myanmar border proximity",
+            "moreh": "Border trade town; restricted access nearby",
+            "daporijo": "Tribal protection and proximity to border",
+            "leh": "Restricted beyond civilian zones",
+            "hanle": "Permit needed; near LAC",
+            "chushul": "Strategic village near LAC",
+            "lohit valley": "Permit required; tribal area",
+            "changlang": "Sensitive tribal district",
+            "roing": "Restricted tribal district",
+            "mayurbhanj": "Tribal zone and wildlife protection",
+            "karbi anglong": "Tribal and ethnic unrest",
+            "pakke-kessang": "Tribal region",
+            "longleng": "Nagaland tribal area",
+            "saddle peak": "Permits required for trekking",
+            "ghnp": "Ecological protection",
+            "phawngpui": "Controlled seasonal access",
+            "keibul lamjao": "Protection of endangered species",
+            "khangchendzonga": "Restricted national park",
+            "chapar chiri": "Near Indo-Pak border",
+            "betul": "Tribal zone and tiger reserve",
+            "tuting": "Permit required; near China border",
+            "zemithang": "Remote village near McMahon Line",
+            "mana pass": "Military-controlled high-altitude pass",
+            "shipki la": "Indo-China trade route; closed",
+            "jadhang": "Permit-only zone",
+            "dumchele": "China-controlled area",
+            "sumdo": "Military clearance zone",
+            "kibithu": "Easternmost village; permit required",
+            "chumar": "Disputed with China",
+            "shiroi hills": "Ecologically sensitive",
+            "kalesar": "Restricted access",
+            "chilika lake": "Sanctuary protection zones",
+            "kolleru lake": "Wetland protected area",
+            "narcondam": "Volcanic, wildlife protection",
+            "kuno": "Cheetah habitat, restricted core",
+            "kumarakom": "Conservation-related access limits",
+            "sharavathi": "Ecological fragility",
+            "bhitarkanika": "Wildlife sanctuary restrictions",
+            "sittilingi": "Cultural tribal preservation",
+            "kotia": "Disputed tribal region",
+            "dandakaranya": "Maoist zone",
+            "narayanpur": "Tribal and insurgency conflict",
+            "aheri": "Maoist region",
+            "lalgarh": "Former Maoist zone; tribal area"
+        };
+
+        // Weather API configuration
+        const WEATHER_API_KEY = "574f368449cc40ceafd155756250905";
+        const WEATHER_API_URL = "http://api.weatherapi.com/v1/forecast.json";
+
+        // Check if location is restricted
+        function checkRestrictedLocation(location) {
+            const locationLower = location.toLowerCase();
+            for (const [restrictedLoc, reason] of Object.entries(RESTRICTED_LOCATIONS)) {
+                if (locationLower.includes(restrictedLoc)) {
+                    return { isRestricted: true, reason };
+                }
+            }
+            return { isRestricted: false, reason: null };
+        }
+
+        // Get weather data
+        async function getWeatherData(location, date) {
+            try {
+                const response = await fetch(`${WEATHER_API_URL}?key=${WEATHER_API_KEY}&q=${location}&dt=${date}&days=3`);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+                return null;
+            }
+        }
+
+        // Analyze weather for trekking
+        function analyzeWeatherForTrekking(weatherData) {
+            if (!weatherData) return [];
+
+            const analysis = [];
+            const day = weatherData.forecast.forecastday[0].day;
+
+            // Temperature analysis
+            const avgTemp = day.avgtemp_c;
+            if (avgTemp < 0) {
+                analysis.push("❄ Extremely cold conditions - risk of hypothermia. Pack heavy winter gear.");
+            } else if (avgTemp < 10) {
+                analysis.push("🥶 Cold conditions - wear layers and proper insulation.");
+            } else if (avgTemp < 20) {
+                analysis.push("😊 Pleasant trekking temperatures - ideal conditions.");
+            } else if (avgTemp < 30) {
+                analysis.push("☀ Warm conditions - stay hydrated and wear sun protection.");
+            } else {
+                analysis.push("🔥 Very hot conditions - consider early morning or late afternoon trekking.");
+            }
+
+            // Rain analysis
+            if (day.daily_chance_of_rain > 70) {
+                analysis.push("🌧 High chance of rain - bring waterproof gear and be prepared for slippery trails.");
+            } else if (day.daily_chance_of_rain > 40) {
+                analysis.push("🌦 Moderate chance of rain - pack a rain jacket just in case.");
+            }
+
+            // UV index analysis
+            if (day.uv > 8) {
+                analysis.push("☀ Very high UV index - wear sunscreen, hat, and sunglasses.");
+            } else if (day.uv > 5) {
+                analysis.push("🌤 High UV index - sunscreen recommended.");
+            }
+
+            return analysis;
+        }
+
+        // Display weather report
+        function displayWeatherReport(location, weatherData, containerId) {
+            if (!weatherData) {
+                document.getElementById(containerId).innerHTML = `<p>Could not fetch weather data for ${location}.</p>`;
+                return;
+            }
+
+            const day = weatherData.forecast.forecastday[0].day;
+            const analysis = analyzeWeatherForTrekking(weatherData);
+
+            const html = `
+                <div class="weather-details">
+                    <h4>${location}</h4>
+                    <p>📅 Date: ${weatherData.forecast.forecastday[0].date}</p>
+                    <p>🌡 Temperature: ${day.mintemp_c}°C to ${day.maxtemp_c}°C (Avg: ${day.avgtemp_c}°C)</p>
+                    <p>🌈 Conditions: ${day.condition.text}</p>
+                    <p>🌧 Chance of Rain: ${day.daily_chance_of_rain}%</p>
+                    <p>❄ Chance of Snow: ${day.daily_chance_of_snow}%</p>
+                    <p>☀ UV Index: ${day.uv}</p>
+                    <p>🌅 Sunrise: ${weatherData.forecast.forecastday[0].astro.sunrise} | 🌇 Sunset: ${weatherData.forecast.forecastday[0].astro.sunset}</p>
+                    
+                    <h5 class="mt-3">🔍 Trekking Analysis:</h5>
+                    <ul>
+                        ${analysis.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+            document.getElementById(containerId).innerHTML = html;
+        }
+
+        // Handle form submission
+        document.getElementById('trekForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const source = document.getElementById('source').value;
+            const destination = document.getElementById('destination').value;
+            let date = document.getElementById('date').value;
+            
+            if (!date) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                date = tomorrow.toISOString().split('T')[0];
+            }
+
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('weatherResults').style.display = 'none';
+            document.getElementById('restrictedAlert').style.display = 'none';
+
+            // Check for restricted location
+            const { isRestricted, reason } = checkRestrictedLocation(destination);
+            if (isRestricted) {
+                document.getElementById('restrictedAlert').style.display = 'block';
+                document.getElementById('restrictedReason').textContent = `Your destination '${destination}' is in a restricted area. Reason: ${reason}`;
+            }
+
+            // Get weather data
+            const sourceWeather = await getWeatherData(source, date);
+            const destWeather = await getWeatherData(destination, date);
+
+            // Display results
+            document.getElementById('weatherResults').style.display = 'block';
+            displayWeatherReport(source, sourceWeather, 'sourceWeather');
+            displayWeatherReport(destination, destWeather, 'destinationWeather');
+
+            // Hide loading
+            document.getElementById('loading').style.display = 'none';
+        });
+    </script>
+</body>
+</html> 

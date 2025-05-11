@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Trekking in India - Plan Your Adventure</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tell us your trekking preferences <span class="emoji">🏔️</span> <span class="emoji">🌲</span></h1>
+            <p>Just provide some basic information, and our trek planner will generate a customized itinerary based on your preferences.</p>
+        </header>
+
+        <form id="trekForm">
+            <div class="form-group">
+                <h2>What is your trekking destination of choice?</h2>
+                <div class="select-wrapper">
+                    <select id="destination" required>
+                        <option value="" disabled selected>Select...</option>
+                        <option value="nun_peak">Nun Peak</option>
+                        <option value="kun_peak">Kun Peak</option>
+                        <option value="saltoro_kangri">Saltoro Kangri</option>
+                        <option value="saser_kangri">Saser Kangri</option>
+                        <option value="stok_kangri">Stok Kangri</option>
+                        <option value="mamostong_kangri">Mamostong Kangri</option>
+                        <option value="rimo_i">Rimo I</option>
+                        <option value="hanuman_tibba">Hanuman Tibba</option>
+                        <option value="deo_tibba">Deo Tibba</option>
+                        <option value="indrasan">Indrasan</option>
+                        <option value="friendship_peak">Friendship Peak</option>
+                        <option value="shilla_peak">Shilla Peak</option>
+                        <option value="nanda_devi">Nanda Devi</option>
+                        <option value="kamet">Kamet</option>
+                        <option value="trisul">Trisul</option>
+                        <option value="kedarnath">Kedarnath</option>
+                        <option value="chaukhamba">Chaukhamba</option>
+                        <option value="shivling">Shivling</option>
+                        <option value="bhagirathi_i">Bhagirathi I</option>
+                        <option value="dunagiri">Dunagiri</option>
+                        <option value="panchachuli">Panchachuli</option>
+                        <option value="hardeol">Hardeol</option>
+                        <option value="bandarpunch">Bandarpunch</option>
+                        <option value="neelkanth">Neelkanth</option>
+                        <option value="kanchenjunga">Kanchenjunga</option>
+                        <option value="kabru">Kabru</option>
+                        <option value="pandim">Pandim</option>
+                        <option value="simvo">Simvo</option>
+                        <option value="kangto">Kangto</option>
+                        <option value="gorichen">Gorichen</option>
+                        <option value="sandakphu">Sandakphu</option>
+                        <option value="phalut">Phalut</option>
+                        <option value="guru_shikhar">Guru Shikhar</option>
+                        <option value="kalsubai">Kalsubai</option>
+                        <option value="harishchandragad">Harishchandragad</option>
+                        <option value="rajmachi">Rajmachi</option>
+                        <option value="mahabaleshwar">Mahabaleshwar</option>
+                        <option value="matheran">Matheran</option>
+                        <option value="saputara_hill">Saputara Hill</option>
+                        <option value="anamudi">Anamudi</option>
+                        <option value="agasthyarkoodam">Agasthyarkoodam</option>
+                        <option value="doddabetta">Doddabetta</option>
+                        <option value="mukurthi_peak">Mukurthi Peak</option>
+                        <option value="mullayanagiri">Mullayanagiri</option>
+                        <option value="kudremukh">Kudremukh</option>
+                        <option value="mahendragiri">Mahendragiri</option>
+                        <option value="arma_konda">Arma Konda</option>
+                        <option value="phawngpui">Phawngpui</option>
+                        <option value="mount_saramati">Mount Saramati</option>
+                        <option value="shillong_peak">Shillong Peak</option>
+                    </select>
+                    <span class="select-arrow"><i class="fas fa-chevron-down"></i></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h2>How many days are you planning your trek?</h2>
+                <input type="number" id="days" placeholder="Ex: 5" min="1" max="30" required>
+            </div>
+
+            <div class="form-group">
+                <h2>What is Your Budget?</h2>
+                <div class="budget-options">
+                    <div class="budget-option" data-value="budget">
+                        <div class="icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <h3>Budget</h3>
+                        <p>Stay conscious of costs</p>
+                    </div>
+                    <div class="budget-option" data-value="moderate">
+                        <div class="icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3>Moderate</h3>
+                        <p>Keep cost on the average</p>
+                    </div>
+                    <div class="budget-option" data-value="luxury">
+                        <div class="icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Luxury</h3>
+                        <p>Don't worry about cost</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h2>What is your trekking experience level?</h2>
+                <div class="experience-options">
+                    <div class="experience-option" data-value="beginner">
+                        <div class="icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3>Beginner</h3>
+                        <p>New to trekking</p>
+                    </div>
+                    <div class="experience-option" data-value="intermediate">
+                        <div class="icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>Intermediate</h3>
+                        <p>Some trekking experience</p>
+                    </div>
+                    <div class="experience-option" data-value="advanced">
+                        <div class="icon">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h3>Advanced</h3>
+                        <p>Experienced trekker</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h2>When are you planning to trek?</h2>
+                <input type="date" id="trekDate" required>
+            </div>
+
+            <button type="submit" class="submit-btn">Generate Trek Plan</button>
+        </form>
+
+        <div id="result" class="hidden">
+            <h2>Here is Your Generated Plan</h2>
+            <div id="plan-content"></div>
+            <button id="back-btn" class="back-btn">Create Another Plan</button>
+        </div>
+    </div>
+
+    <div class="hero-buttons">
+        <button class="primary-button" id="start">Start Planning</button>
+        <button class="secondary-button">Safety Features</button>
+        <button class="tertiary-button">AI Chat Bot</button>
+        <button class="primary-button" id="plan-adventure">Plan Your Adventure</button>
+        <button class="primary-button" id="booking">Packages</button>
+    </div>
+
+    <script src="gemini-api.js"></script>
+    <script src="nun_peak_days.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('plan-adventure').addEventListener('click', function() {
+            window.location.href = 'Booking/index.html';
+        });
+    </script>
+</body>
+</html>

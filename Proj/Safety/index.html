@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Mountain Tourism Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Indian Mountain Tourism Assistant</h1>
+            <p>Discover safe and exciting mountain adventures across India</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="mountain">Select Mountain:</label>
+                    <select id="mountain" required>
+                        <option value="">Choose a mountain...</option>
+                        <optgroup label="Himalayan Region">
+                            <option value="nun-peak">Nun Peak</option>
+                            <option value="kun-peak">Kun Peak</option>
+                            <option value="saltoro-kangri">Saltoro Kangri</option>
+                            <option value="saser-kangri">Saser Kangri</option>
+                            <option value="stok-kangri">Stok Kangri</option>
+                            <option value="mamostong-kangri">Mamostong Kangri</option>
+                            <option value="rimo-i">Rimo I</option>
+                            <option value="hanuman-tibba">Hanuman Tibba</option>
+                            <option value="deo-tibba">Deo Tibba</option>
+                            <option value="indrasan">Indrasan</option>
+                            <option value="friendship-peak">Friendship Peak</option>
+                            <option value="shilla-peak">Shilla Peak</option>
+                            <option value="nanda-devi">Nanda Devi</option>
+                            <option value="kamet">Kamet</option>
+                            <option value="trisul">Trisul</option>
+                            <option value="kedarnath">Kedarnath</option>
+                            <option value="chaukhamba">Chaukhamba</option>
+                            <option value="shivling">Shivling</option>
+                            <option value="bhagirathi-i">Bhagirathi I</option>
+                            <option value="dunagiri">Dunagiri</option>
+                            <option value="panchachuli">Panchachuli</option>
+                            <option value="hardeol">Hardeol</option>
+                            <option value="bandarpunch">Bandarpunch</option>
+                            <option value="neelkanth">Neelkanth</option>
+                            <option value="kanchenjunga">Kanchenjunga</option>
+                            <option value="kabru">Kabru</option>
+                            <option value="pandim">Pandim</option>
+                            <option value="simvo">Simvo</option>
+                            <option value="kangto">Kangto</option>
+                            <option value="gorichen">Gorichen</option>
+                            <option value="sandakphu">Sandakphu</option>
+                            <option value="phalut">Phalut</option>
+                        </optgroup>
+                        <optgroup label="Western Ghats">
+                            <option value="guru-shikhar">Guru Shikhar</option>
+                            <option value="kalsubai">Kalsubai</option>
+                            <option value="harishchandragad">Harishchandragad</option>
+                            <option value="rajmachi">Rajmachi</option>
+                            <option value="mahabaleshwar">Mahabaleshwar</option>
+                            <option value="matheran">Matheran</option>
+                            <option value="saputara-hill">Saputara Hill</option>
+                        </optgroup>
+                        <optgroup label="Southern Region">
+                            <option value="anamudi">Anamudi</option>
+                            <option value="agasthyarkoodam">Agasthyarkoodam</option>
+                            <option value="doddabetta">Doddabetta</option>
+                            <option value="mukurthi-peak">Mukurthi Peak</option>
+                            <option value="mullayanagiri">Mullayanagiri</option>
+                            <option value="kudremukh">Kudremukh</option>
+                            <option value="mahendragiri">Mahendragiri</option>
+                            <option value="arma-konda">Arma Konda</option>
+                        </optgroup>
+                        <optgroup label="North-East Region">
+                            <option value="phawngpui">Phawngpui</option>
+                            <option value="mount-saramati">Mount Saramati</option>
+                            <option value="shillong-peak">Shillong Peak</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="experience">Experience Level:</label>
+                    <select id="experience" required>
+                        <option value="">Select your experience...</option>
+                        <option value="novice">Novice</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="expert">Expert</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Interests:</label>
+                    <div class="interests-grid">
+                        <label class="interest-option">
+                            <input type="checkbox" value="trekking"> Trekking
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="camping"> Camping
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="sightseeing"> Sightseeing
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="skiing"> Skiing
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="spiritual"> Spiritual Tourism
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="photography"> Photography
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="wildlife"> Wildlife
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="birdwatching"> Birdwatching
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="paragliding"> Paragliding
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="rock-climbing"> Rock Climbing
+                        </label>
+                        <label class="interest-option">
+                            <input type="checkbox" value="nature-trails"> Nature Trails
+                        </label>
+                    </div>
+                </div>
+
+                <button id="getRecommendations">Get Personalized Recommendations</button>
+            </div>
+
+            <div class="weather-section">
+                <h2>Current Weather Conditions</h2>
+                <div id="weather-info">
+                    <div class="weather-card">
+                        <div id="temperature">--°C</div>
+                        <div id="conditions">Loading...</div>
+                        <div id="wind">Wind: -- km/h</div>
+                        <div id="visibility">Visibility: -- km</div>
+                        <div id="precipitation">Precipitation: -- mm</div>
+                        <div id="snow">Snow Depth: -- cm</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendations-section">
+                <h2>Your Personalized Recommendations</h2>
+                <div id="recommendations" class="recommendations-container">
+                    <p class="placeholder-text">Select your preferences and click "Get Personalized Recommendations" to see your customized mountain adventure suggestions.</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 Indian Mountain Tourism Assistant | Your trusted guide to mountain adventures</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

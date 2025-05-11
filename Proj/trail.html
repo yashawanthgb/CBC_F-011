@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trail Matcher - Parvath Parakram</title>
+    <link rel="stylesheet" href="trail.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic styling - you can move this to trail.css */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h2, h3, h4 {
+            color: #2c3e50;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .primary-button {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .primary-button:hover {
+            background-color: #2980b9;
+        }
+        
+        .secondary-button {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        .secondary-button:hover {
+            background-color: #bdc3c7;
+        }
+        
+        .full-width {
+            width: 100%;
+        }
+        
+        .matcher-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .form-container {
+            flex: 1;
+        }
+        
+        .results-container {
+            flex: 2;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .match-tag {
+            background-color: #2ecc71;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .trail-info {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            width: 100px;
+        }
+        
+        .real-time-data {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        
+        .data-card {
+            text-align: center;
+        }
+        
+        .data-value {
+            font-size: 24px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .data-desc {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .trail-options {
+            margin-top: 20px;
+        }
+        
+        .trail-option {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .trail-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .trail-option-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .trail-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="ai-matcher" class="ai-matcher">
+        <div class="container">
+            <h2>AI-Powered Trail Matcher</h2>
+            <div class="matcher-container">
+                <div class="form-container">
+                    <div class="card form-card">
+                        <div class="form-group">
+                            <label for="experience">Your Experience Level</label>
+                            <select id="experience">
+                                <option value="" disabled selected>Select experience level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="terrain">Preferred Terrain</label>
+                            <select id="terrain">
+                                <option value="" disabled selected>Select terrain type</option>
+                                <option value="rocky">Rocky</option>
+                                <option value="forested">Forested</option>
+                                <option value="snowy">Snowy</option>
+                                <option value="alpine">Alpine</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="duration">Trip Duration</label>
+                            <select id="duration">
+                                <option value="" disabled selected>Select duration</option>
+                                <option value="day">Day Trip</option>
+                                <option value="weekend">Weekend (2-3 days)</option>
+                                <option value="week">Week-long (4-7 days)</option>
+                                <option value="extended">Extended (8+ days)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="region">Destination Region</label>
+                            <select id="region">
+                                <option value="" disabled selected>Select region</option>
+                                <option value="himalayas">Himalayas</option>
+                                <option value="western-ghats">Western Ghats</option>
+                                <option value="eastern-ghats">Eastern Ghats</option>
+                                <option value="nilgiris">Nilgiris</option>
+                            </select>
+                        </div>
+                        <button id="findTrailBtn" class="primary-button full-width">Find Perfect Trail</button>
+                    </div>
+                </div>
+                <div class="results-container">
+                    <div id="resultsCard" class="card results-card" style="display: none;">
+                        <div class="results-header">
+                            <h3>Recommended Trails</h3>
+                        </div>
+                        <div id="trailOptions" class="trail-options">
+                            <!-- Trail options will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="real-time-data">
+                        <div class="card data-card">
+                            <h4>Weather</h4>
+                            <div class="data-info">
+                                <span id="weatherTemp" class="data-value">-</span>
+                                <span id="weatherDesc" class="data-desc">Select region first</span>
+                            </div>
+                        </div>
+                        <div class="card data-card">
+                            <h4>Trail Conditions</h4>
+                            <div class="data-info">
+                                <span id="trailCondition" class="data-value">-</span>
+                                <span id="trailConditionDesc" class="data-desc">Select region first</span>
+                            </div>
+                        </div>
+                        <div class="card data-card">
+                            <h4>Crowd Level</h4>
+                            <div class="data-info">
+                                <span id="crowdLevel" class="data-value">-</span>
+                                <span id="crowdLevelDesc" class="data-desc">Select region first</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mountain data for different regions
+        const mountainData = {
+            himalayas: [
+                {
+                    name: "Kedarkantha Peak",
+                    difficulty: "Moderate",
+                    duration: "5 days",
+                    elevation: "3,800m",
+                    terrain: "Snowy",
+                    match: "89%",
+                    weather: "12°C",
+                    weatherDesc: "Partly Cloudy",
+                    condition: "Good",
+                    conditionDesc: "Recently maintained",
+                    crowd: "Low",
+                    crowdDesc: "Few hikers expected"
+                },
+                {
+                    name: "Hampta Pass",
+                    difficulty: "Moderate",
+                    duration: "4 days",
+                    elevation: "4,270m",
+                    terrain: "Alpine",
+                    match: "85%",
+                    weather: "8°C",
+                    weatherDesc: "Sunny",
+                    condition: "Excellent",
+                    conditionDesc: "Fresh snowfall",
+                    crowd: "Medium",
+                    crowdDesc: "Moderate traffic"
+                },
+                {
+                    name: "Valley of Flowers",
+                    difficulty: "Easy",
+                    duration: "6 days",
+                    elevation: "3,600m",
+                    terrain: "Forested",
+                    match: "92%",
+                    weather: "15°C",
+                    weatherDesc: "Clear skies",
+                    condition: "Good",
+                    conditionDesc: "Well-marked trail",
+                    crowd: "High",
+                    crowdDesc: "Peak season"
+                }
+            ],
+            "western-ghats": [
+                {
+                    name: "Tadiandamol",
+                    difficulty: "Easy",
+                    duration: "2 days",
+                    elevation: "1,748m",
+                    terrain: "Forested",
+                    match: "78%",
+                    weather: "22°C",
+                    weatherDesc: "Misty",
+                    condition: "Good",
+                    conditionDesc: "Slippery in parts",
+                    crowd: "Medium",
+                    crowdDesc: "Weekend crowds"
+                },
+                {
+                    name: "Kodachadri",
+                    difficulty: "Moderate",
+                    duration: "1 day",
+                    elevation: "1,343m",
+                    terrain: "Rocky",
+                    match: "82%",
+                    weather: "25°C",
+                    weatherDesc: "Possible showers",
+                    condition: "Fair",
+                    conditionDesc: "Some overgrowth",
+                    crowd: "Low",
+                    crowdDesc: "Light traffic"
+                }
+            ],
+            "eastern-ghats": [
+                {
+                    name: "Araku Valley Trek",
+                    difficulty: "Easy",
+                    duration: "2 days",
+                    elevation: "1,300m",
+                    terrain: "Forested",
+                    match: "75%",
+                    weather: "28°C",
+                    weatherDesc: "Humid",
+                    condition: "Good",
+                    conditionDesc: "Well-maintained",
+                    crowd: "Low",
+                    crowdDesc: "Few visitors"
+                }
+            ],
+            nilgiris: [
+                {
+                    name: "Doddabetta Peak",
+                    difficulty: "Easy",
+                    duration: "1 day",
+                    elevation: "2,637m",
+                    terrain: "Forested",
+                    match: "80%",
+                    weather: "18°C",
+                    weatherDesc: "Cool breeze",
+                    condition: "Excellent",
+                    conditionDesc: "Paved path",
+                    crowd: "High",
+                    crowdDesc: "Tourist favorite"
+                },
+                {
+                    name: "Mukurthi Peak",
+                    difficulty: "Moderate",
+                    duration: "3 days",
+                    elevation: "2,554m",
+                    terrain: "Alpine",
+                    match: "88%",
+                    weather: "14°C",
+                    weatherDesc: "Foggy",
+                    condition: "Good",
+                    conditionDesc: "Some rocky sections",
+                    crowd: "Medium",
+                    crowdDesc: "Guided groups only"
+                }
+            ]
+        };
+
+        // Weather data for regions
+        const regionWeather = {
+            himalayas: { temp: "12°C", desc: "Partly Cloudy" },
+            "western-ghats": { temp: "22°C", desc: "Misty" },
+            "eastern-ghats": { temp: "28°C", desc: "Humid" },
+            nilgiris: { temp: "18°C", desc: "Cool breeze" }
+        };
+
+        // Trail conditions for regions
+        const regionConditions = {
+            himalayas: { condition: "Good", desc: "Recently maintained" },
+            "western-ghats": { condition: "Good", desc: "Slippery in parts" },
+            "eastern-ghats": { condition: "Good", desc: "Well-maintained" },
+            nilgiris: { condition: "Excellent", desc: "Paved path" }
+        };
+
+        // Crowd levels for regions
+        const regionCrowds = {
+            himalayas: { level: "Low", desc: "Few hikers expected" },
+            "western-ghats": { level: "Medium", desc: "Weekend crowds" },
+            "eastern-ghats": { level: "Low", desc: "Few visitors" },
+            nilgiris: { level: "High", desc: "Tourist favorite" }
+        };
+
+        document.getElementById('findTrailBtn').addEventListener('click', function() {
+            const region = document.getElementById('region').value;
+            const experience = document.getElementById('experience').value;
+            const terrain = document.getElementById('terrain').value;
+            const duration = document.getElementById('duration').value;
+            
+            if (!region || !experience || !terrain || !duration) {
+                alert('Please fill in all fields to find trails.');
+                return;
+            }
+            
+            // Filter mountains based on selected region
+            const mountains = mountainData[region] || [];
+            
+            // Display the results card
+            const resultsCard = document.getElementById('resultsCard');
+            resultsCard.style.display = 'block';
+            
+            // Clear previous results
+            const trailOptions = document.getElementById('trailOptions');
+            trailOptions.innerHTML = '';
+            
+            if (mountains.length === 0) {
+                trailOptions.innerHTML = '<p>No trails found matching your criteria. Please try different options.</p>';
+                return;
+            }
+            
+            // Add each mountain option
+            mountains.forEach(mountain => {
+                const trailOption = document.createElement('div');
+                trailOption.className = 'trail-option';
+                trailOption.innerHTML = `
+                    <div class="trail-option-header">
+                        <span class="trail-name">${mountain.name}</span>
+                        <span class="match-tag">${mountain.match} Match</span>
+                    </div>
+                    <div class="trail-info">
+                        <span class="info-label">Difficulty:</span>
+                        <span class="info-value">${mountain.difficulty}</span>
+                    </div>
+                    <div class="trail-info">
+                        <span class="info-label">Duration:</span>
+                        <span class="info-value">${mountain.duration}</span>
+                    </div>
+                    <div class="trail-info">
+                        <span class="info-label">Elevation:</span>
+                        <span class="info-value">${mountain.elevation}</span>
+                    </div>
+                    <div class="trail-info">
+                        <span class="info-label">Terrain:</span>
+                        <span class="info-value">${mountain.terrain}</span>
+                    </div>
+                    <button class="secondary-button full-width view-details" data-mountain='${JSON.stringify(mountain)}'>View Details</button>
+                `;
+                trailOptions.appendChild(trailOption);
+            });
+            
+            // Update real-time data based on region
+            updateRealTimeData(region);
+        });
+        
+        // Update real-time data displays
+        function updateRealTimeData(region) {
+            document.getElementById('weatherTemp').textContent = regionWeather[region].temp;
+            document.getElementById('weatherDesc').textContent = regionWeather[region].desc;
+            document.getElementById('trailCondition').textContent = regionConditions[region].condition;
+            document.getElementById('trailConditionDesc').textContent = regionConditions[region].desc;
+            document.getElementById('crowdLevel').textContent = regionCrowds[region].level;
+            document.getElementById('crowdLevelDesc').textContent = regionCrowds[region].desc;
+        }
+        
+        // Event delegation for view details buttons
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('view-details')) {
+                const mountainData = JSON.parse(e.target.getAttribute('data-mountain'));
+                alert(`Detailed information for ${mountainData.name}:\n\n` +
+                      `Difficulty: ${mountainData.difficulty}\n` +
+                      `Duration: ${mountainData.duration}\n` +
+                      `Elevation: ${mountainData.elevation}\n` +
+                      `Terrain: ${mountainData.terrain}\n` +
+                      `Current Weather: ${mountainData.weather} (${mountainData.weatherDesc})\n` +
+                      `Trail Condition: ${mountainData.condition} - ${mountainData.conditionDesc}\n` +
+                      `Crowd Level: ${mountainData.crowd} - ${mountainData.crowdDesc}`);
+            }
+        });
+        
+        // Update real-time data when region changes
+        document.getElementById('region').addEventListener('change', function() {
+            const region = this.value;
+            if (region) {
+                updateRealTimeData(region);
+            }
+        });
+    </script>
+</body>
+
+</html>
